@@ -27,4 +27,4 @@
 <p>С поддердиваемыми kinds я ознакомилась в источнике https://containerlab.dev/manual/kinds/ и для лабораторной работы выбрала vr-ros(роутер и свичи) и linux (ПК)
 <h3>Выполнение</h3>
 <p>Создадим трехуровневую сеть связи классического предприятия изображенную на рисунке 1 (из задания) в ContainerLab. Для этого пропишем топологию в файле lab1.yaml. С помощью команды clab deploy --topo lab1.yaml развернем лабораторию. На выходе получим 6 контейнеров.
-![image](https://github.com/GusyLebedy/2023_2024-introduction_in_routing-k33202-gusevskaya_a_e/assets/90906519/90a2c694-0d1a-4194-a950-1f599cc840a9)
+<p>![image](https://github.com/GusyLebedy/2023_2024-introduction_in_routing-k33202-gusevskaya_a_e/1.jpg)
