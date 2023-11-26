@@ -6,7 +6,7 @@
 <p>Author: Gusevskaya Arina Eduardovna</p>
 <p>Lab: Lab1</p>
 <p>Date of create: 01.10.2023</p>
-<p>Date of finished: ..2023</p>
+<p>Date of finished: 27.11.2023</p>
 
 <p align="center"> <h2> Отчёт по лабораторной работе №1 "Установка ContainerLab и развертывание тестовой сети связи"</h2> </p>
 <p><b>Цель:</b> Ознакомиться с инструментом ContainerLab и методами работы с ним, изучить работу VLAN, IP адресации и т.д.
