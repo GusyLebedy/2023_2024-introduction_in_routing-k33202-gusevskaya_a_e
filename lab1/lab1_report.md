@@ -26,7 +26,55 @@
 <p>kinds (виды) - определяют поведение и природу узла, это говорит о том, является ли узел конкретной операционной системой контейнерной сети, виртуализированным маршрутизатором или чем-то еще.
 <p>С поддердиваемыми kinds я ознакомилась в источнике https://containerlab.dev/manual/kinds/ и для лабораторной работы выбрала vr-ros(роутер и свичи) и linux (ПК)
 <h3>Выполнение</h3>
-<p>Создадим трехуровневую сеть связи классического предприятия изображенную на рисунке 1 (из задания) в ContainerLab. Для этого пропишем топологию в файле lab1.yaml. С помощью команды clab deploy --topo lab1.yaml развернем лабораторию. На выходе получим 6 контейнеров.
+<p>Создадим трехуровневую сеть связи классического предприятия изображенную на рисунке 1 (из задания) в ContainerLab. Для этого пропишем топологию в файле lab1.yaml.
+```
+name: lab1
+
+mgmt:
+  network: statics
+  ipv4-subnet: 172.20.15.0/24
+
+topology: 
+
+  nodes:
+    R01.TEST: 
+      kind: vr-ros
+      image: vrnetlab/vr-routeros:6.47.9
+      mgmt-ipv4: 172.20.15.12
+
+    SW01.L3.01.TEST:
+      kind: vr-ros
+      image: vrnetlab/vr-routeros:6.47.9
+      mgmt-ipv4: 172.20.15.13
+
+    SW02.L3.01.TEST:
+      kind: vr-ros
+      image: vrnetlab/vr-routeros:6.47.9
+      mgmt-ipv4: 172.20.15.14
+
+    SW02.L3.02.TEST:
+      kind: vr-ros
+      image: vrnetlab/vr-routeros:6.47.9
+      mgmt-ipv4: 172.20.15.15
+
+    PC1:
+      kind: linux
+      image: alpine:latest
+      mgmt-ipv4: 172.20.15.16
+
+    PC2:
+      kind: linux
+      image: ubuntu:latest
+      mgmt-ipv4: 172.20.15.17
+
+  links: 
+    - endpoints: ["R01.TEST:eth1","SW01.L3.01.TEST:eth1"] 
+    - endpoints: ["SW01.L3.01.TEST:eth2","SW02.L3.01.TEST:eth1"] 
+    - endpoints: ["SW01.L3.01.TEST:eth3","SW02.L3.02.TEST:eth1"] 
+    - endpoints: ["SW02.L3.01.TEST:eth2","PC1:eth1"] 
+    - endpoints: ["SW02.L3.02.TEST:eth2","PC2:eth1"] 
+```
+<p> С помощью команды `clab deploy --topo lab1.yaml` развернем лабораторию. На выходе получим 6 контейнеров.
 <p><img src="pictures/1.jpg">
 <p>Создадим схему связи, используя drawio</p>
 <p><img src="Network.drawio.png">
