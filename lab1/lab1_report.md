@@ -26,7 +26,7 @@
 <p>kinds (виды) - определяют поведение и природу узла, это говорит о том, является ли узел конкретной операционной системой контейнерной сети, виртуализированным маршрутизатором или чем-то еще.
 <p>С поддердиваемыми kinds я ознакомилась в источнике https://containerlab.dev/manual/kinds/ и для лабораторной работы выбрала vr-ros(роутер и свичи) и linux (ПК)
 <h3>Выполнение</h3>
-<p>Создадим трехуровневую сеть связи классического предприятия изображенную на рисунке 1 (из задания) в ContainerLab. Для этого пропишем топологию в файле lab1.yaml.
+<p>1. Создадим трехуровневую сеть связи классического предприятия изображенную на рисунке 1 (из задания) в ContainerLab. Для этого пропишем топологию в файле lab1.yaml.
   
 ```
 name: lab1
@@ -77,8 +77,10 @@ topology:
 ```
 <p> С помощью команды ```clab deploy --topo lab1.yaml``` развернем лабораторию. На выходе получим 6 контейнеров.
 <p><img src="pictures/1.jpg">
-<p>Создадим схему связи, используя drawio</p>
-<p><img src="Network.drawio.png">
+<p>2. Создадим схему связи, используя drawio</p>
+<p align="center"><img src="Network.drawio.png">
+
+<p>3. Перейдем к настройке оборудования:
 
 <h5>R01.TEST</h5>
 
@@ -180,3 +182,22 @@ add disabled=no interface=bridge20
 /system identity
 set name=SW02.L3.02.TEST
 ```
+<h3>Проверка целостности сети</h3>
+<p>1. Выведем адреса интерфейсов
+<p align="center">
+ <img width="500px" src="pictures/network.png" alt="qr"/>
+</p>
+<p>2. Проверим доступность устройств, пропинговав их
+<p align="center">
+ <img width="500px" src="pictures/R01.TEST.png" alt="qr"/>
+</p>
+<p align="center">Пинги с роутера на PC
+<p align="center">
+ <img width="500px" src="pictures/SW02.L3.01.png" alt="qr"/>
+</p>
+<p align="center">Пинги с свича второго уровня на роутер
+<p align="center">
+ <img width="500px" src="pictures/SW02.L3.01 to PC.png" alt="qr"/>
+</p>
+<p align="center">Пинги с свича второго уровня на PC
+<p><b>Вывод:</b> В ходе работы были получены навыки создания виртуализированных контейнеров с помощью Docker и ContainerLab. Произведена настройка VLAN, IP адресации, DHCP.
