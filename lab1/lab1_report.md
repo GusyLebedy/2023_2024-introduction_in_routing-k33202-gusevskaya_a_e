@@ -27,6 +27,7 @@
 <p>С поддердиваемыми kinds я ознакомилась в источнике https://containerlab.dev/manual/kinds/ и для лабораторной работы выбрала vr-ros(роутер и свичи) и linux (ПК)
 <h3>Выполнение</h3>
 <p>Создадим трехуровневую сеть связи классического предприятия изображенную на рисунке 1 (из задания) в ContainerLab. Для этого пропишем топологию в файле lab1.yaml.
+  
 ```
 name: lab1
 
@@ -74,8 +75,108 @@ topology:
     - endpoints: ["SW02.L3.01.TEST:eth2","PC1:eth1"] 
     - endpoints: ["SW02.L3.02.TEST:eth2","PC2:eth1"] 
 ```
-<p> С помощью команды `clab deploy --topo lab1.yaml` развернем лабораторию. На выходе получим 6 контейнеров.
+<p> С помощью команды ```clab deploy --topo lab1.yaml``` развернем лабораторию. На выходе получим 6 контейнеров.
 <p><img src="pictures/1.jpg">
 <p>Создадим схему связи, используя drawio</p>
 <p><img src="Network.drawio.png">
 
+<h5>R01.TEST</h5>
+
+```
+/interface vlan
+add interface=ether2 name=vlan10 vlan-id=10
+add interface=ether2 name=vlan20 vlan-id=20
+/interface wireless security-profiles
+set [ find default=yes ] supplicant-identity=MikroTik
+/ip pool
+add name=pool10 ranges=192.168.10.10-192.168.10.254
+add name=pool20 ranges=192.168.20.10-192.168.20.254
+/ip dhcp-server
+add address-pool=pool10 disabled=no interface=vlan10 name=dhcp10
+add address-pool=pool20 disabled=no interface=vlan20 name=dhcp20
+/ip address
+add address=172.31.255.30/30 interface=ether1 network=172.31.255.28
+add address=192.168.10.1/24 interface=vlan10 network=192.168.10.0
+add address=192.168.20.1/24 interface=vlan20 network=192.168.20.0
+/ip dhcp-client
+add disabled=no interface=ether1
+/ip dhcp-server network
+add address=192.168.10.0/24 gateway=192.168.10.1
+add address=192.168.20.0/24 gateway=192.168.20.1
+/system identity
+set name=R01.TEST
+```
+<p>1. Cоздадим два виртуальных интерфейса VLAN на физическом интерфейсе ether2 с идентификаторами vlan10 и vlan20.
+<p>2. Для каждого vlan создадим пул адресов DHCP: pool10 и pool20 соответственно.
+<p>3. Создадим два DHCP-сервера для выдачи ip-адресов из пула, каждый из которых связан с соответствующим интерфейсом vlan.
+
+<h5>SW01.L3.01.TEST</h5>
+
+```
+/interface bridge
+add name=bridge10
+add name=bridge20
+/interface vlan
+add interface=ether2 name=vlan10 vlan-id=10
+add interface=ether2 name=vlan20 vlan-id=20
+add interface=ether3 name=vlan100 vlan-id=10
+add interface=ether4 name=vlan200 vlan-id=20
+/interface wireless security-profiles
+set [ find default=yes ] supplicant-identity=MikroTik
+/interface bridge port
+add bridge=bridge10 interface=vlan10
+add bridge=bridge20 interface=vlan20
+add bridge=bridge10 interface=vlan100
+add bridge=bridge20 interface=vlan200
+/ip address
+add address=172.31.255.30/30 interface=ether1 network=172.31.255.28
+/ip dhcp-client
+add disabled=no interface=ether1
+add disabled=no interface=bridge10
+add disabled=no interface=bridge20
+/system identity
+set name=SW01.L3.01.TEST
+```
+<p>1. Создадим мост "bridge", объединяющий vlan10 и vlan20.
+<p>2. Включеним DHCP-клиент на интерфейсе "ether1".
+  
+<h5>SW02.L3.01.TEST</h5>
+  
+```
+/interface bridge
+add name=bridge10
+/interface vlan
+add interface=ether2 name=vlan10 vlan-id=10
+/interface wireless security-profiles
+set [ find default=yes ] supplicant-identity=MikroTik
+/interface bridge port
+add bridge=bridge10 interface=vlan10
+add bridge=bridge10 interface=ether3
+/ip address
+add address=172.31.255.30/30 interface=ether1 network=172.31.255.28
+/ip dhcp-client
+add disabled=no interface=ether1
+add disabled=no interface=bridge10
+/system identity
+set name=SW02.L3.01.TEST
+```
+<h5>SW02.L3.02.TEST</h5>
+
+```
+/interface bridge
+add name=bridge20
+/interface vlan
+add interface=ether2 name=vlan20 vlan-id=20
+/interface wireless security-profiles
+set [ find default=yes ] supplicant-identity=MikroTik
+/interface bridge port
+add bridge=bridge20 interface=vlan20
+add bridge=bridge20 interface=ether3
+/ip address
+add address=172.31.255.30/30 interface=ether1 network=172.31.255.28
+/ip dhcp-client
+add disabled=no interface=ether1
+add disabled=no interface=bridge20
+/system identity
+set name=SW02.L3.02.TEST
+```
