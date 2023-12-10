@@ -2,7 +2,7 @@ name: lab2
 
 mgmt:
   network: statics
-  ipv4_subnet: 172.20.15.0/24
+  ipv4-subnet: 172.20.15.0/24
 
 topology:
 
@@ -10,32 +10,32 @@ topology:
     R01.MSK:
       kind: vr-ros
       image: vrnetlab/vr-routeros:6.47.9
-      mgmt_ipv4: 172.20.15.12
+      mgmt-ipv4: 172.20.15.12
 
     R01.BRL:
       kind: vr-ros
       image: vrnetlab/vr-routeros:6.47.9
-      mgmt_ipv4: 172.20.15.13
+      mgmt-ipv4: 172.20.15.13
 
     R01.FRT:
       kind: vr-ros
       image: vrnetlab/vr-routeros:6.47.9
-      mgmt_ipv4: 172.20.15.14
+      mgmt-ipv4: 172.20.15.14
 
     PC1:
       kind: linux
       image: alpine:latest
-      mgmt_ipv4: 172.20.15.15
+      mgmt-ipv4: 172.20.15.15
 
     PC2:
       kind: linux
       image: alpine:latest
-      mgmt_ipv4: 172.20.15.16
+      mgmt-ipv4: 172.20.15.16
 
     PC3:
       kind: linux
       image: ubuntu:latest
-      mgmt_ipv4: 172.20.15.17
+      mgmt-ipv4: 172.20.15.17
 
   links:
     - endpoints: ["R01.MSK:eth2", "R01.FRT:eth2"]
