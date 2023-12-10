@@ -38,9 +38,9 @@ topology:
       mgmt_ipv4: 172.20.15.17
 
   links:
-    - endpoints: ["R01.MSK:eth1", "R01.FRT:eth1"]
-    - endpoints: ["R01.MSK:eth0", "R01.BRL:eth0"]
-    - endpoints: ["R01.BRL:eth1", "R01.FRT:eth0"]
-    - endpoints: ["R01.MSK:eth2", "PC1:eth2"]
-    - endpoints: ["R01.FRT:eth2", "PC2:eth2"]
-    - endpoints: ["R01.BRL:eth2", "PC3:eth2"]
+    - endpoints: ["R01.MSK:eth2", "R01.FRT:eth2"]
+    - endpoints: ["R01.MSK:eth1", "R01.BRL:eth1"]
+    - endpoints: ["R01.BRL:eth2", "R01.FRT:eth1"]
+    - endpoints: ["R01.MSK:eth3", "PC1:eth3"]
+    - endpoints: ["R01.FRT:eth3", "PC2:eth3"]
+    - endpoints: ["R01.BRL:eth3", "PC3:eth3"]
