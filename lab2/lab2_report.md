@@ -68,3 +68,12 @@ topology:
     - endpoints: ["R01.FRT:eth3", "PC2:eth3"]
     - endpoints: ["R01.BRL:eth3", "PC3:eth3"]
 ```
+<p>2. С помощью команды ```clab deploy --topo lab2.yaml``` развернем лабораторию. На выходе получим 6 контейнеров.
+<p align="center">
+ <img width="500px" src="pictures/container.png" alt="qr"/>
+</p> 
+3. Создадим схему связи, используя drawio
+<p align="center">
+ <img width="500px" src="Network.drawio.png" alt="qr"/>
+</p>
+
