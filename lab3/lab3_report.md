@@ -98,7 +98,7 @@ topology:
 <p><b>OSPF</b> - протокол маршрутизации, который используется для определения наиболее короткого пути между узлами в IP-сети.
 <p>Подключимся к устройству через telnet.
 <p align="center">
- <img width="500px" src="config.png" alt="qr"/>
+ <img width="500px" src="pictures/config.png" alt="qr"/>
 </p>
   
 <h5>R01.NY</h5>
