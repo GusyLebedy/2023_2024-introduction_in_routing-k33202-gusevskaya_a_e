@@ -18,7 +18,7 @@
 </p>
 <p>3. Были прописаны те же топологии, но изменены устройства</p>
 <h3>Выполнение</h3>
-<p>1. Создадим сеть связи изображенную на рисунке 1 (из задания) в ContainerLab. Для этого пропишем топологию в файле lab2.yaml.
+<p>1. Создадим сеть связи изображенную на рисунке 1 (из задания) в ContainerLab. Для этого пропишем топологию в файле lab3.yaml.
   
 ```
 name: lab3
@@ -309,3 +309,29 @@ add disabled=no interface=ether1
 set name=PC1
 ```
 Добавим статические ip-адреса
+
+<h3>Таблица маршрутизации</h3>
+<p align="center">
+ <img width="500px" src="pictures/routingny.png" alt="qr"/>
+</p> 
+<p align="center">R01.NY
+ <p align="center">
+ <img width="500px" src="pictures/routingmsk.png" alt="qr"/>
+</p> 
+<p align="center">R01.MSK
+<h3>Трассировка</h3>
+<p align="center">
+ <img width="500px" src="pictures/road.png" alt="qr"/>
+</p> 
+<p align="center">SPB->NY
+<h3>Проверка целостности сети</h3>
+<p align="center">
+ <img width="500px" src="pictures/ping1.png" alt="qr"/>
+</p> 
+<p align="center">PC1 -> SGI_Prism
+<p align="center">
+ <img width="500px" src="pictures/ping2.png" alt="qr"/>
+</p> 
+<p align="center">SGI_Prism -> PC1
+ 
+<p><b>Вывод:</b> В ходе лабораторной работы были изучены протоколы OSPF и MPLS, а также механизмы организации EoMPLS.
