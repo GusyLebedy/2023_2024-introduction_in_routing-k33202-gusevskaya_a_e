@@ -96,8 +96,66 @@ topology:
 <p><b>EoMPLS</b> - используется для объединения локальных сетей в одну, что позволяет управлять трафиком более эффективно.
 <p><b>MPLS LDP</b> - протокол, распределяющий labels.
 <p><b>OSPF</b> - протокол маршрутизации, который используется для определения наиболее короткого пути между узлами в IP-сети.
+<p>Подключимся к устройству через telnet.
+<p align="center">
+ <img width="500px" src="config.png" alt="qr"/>
+</p>
   
-<h5>R01.MSK</h5>
+<h5>R01.NY</h5>
 
 ```
+/interface bridge
+add name=EoMPLS_bridge
+add name=loopback
+/interface vpls
+add cisco-style=yes cisco-style-id=222 disabled=no l2mtu=1500 mac-address=02:73:6A:04:96:C5 name=EoMPLS remote-peer=10.10.10.6
+/interface wireless security-profiles
+set [ find default=yes ] supplicant-identity=MikroTik
+/routing ospf instance
+set [ find default=yes ] router-id=10.10.10.1
+/interface bridge port
+add bridge=EoMPLS_bridge interface=ether2
+add bridge=EoMPLS_bridge interface=EoMPLS
+/ip address
+add address=172.31.255.30/30 interface=ether1 network=172.31.255.28
+add address=10.0.0.1/30 interface=ether3 network=10.0.0.0
+add address=10.0.2.1/30 interface=ether4 network=10.0.2.0
+add address=10.10.10.1 interface=loopback network=10.10.10.1
+/ip dhcp-client
+add disabled=no interface=ether1
+/mpls ldp
+set enabled=yes transport-address=10.10.10.1
+/mpls ldp interface
+add interface=ether3
+add interface=ether4
+/routing ospf network
+add area=backbone
+/system identity
+set name=R01.NY
+```
+<h5>R01.LND</h5>
 
+```
+/interface bridge
+add name=loopback
+/interface wireless security-profiles
+set [ find default=yes ] supplicant-identity=MikroTik
+/routing ospf instance
+set [ find default=yes ] router-id=2.2.2.2
+/ip address
+add address=172.31.255.30/30 interface=ether1 network=172.31.255.28
+add address=10.0.1.2/30 interface=ether2 network=10.0.1.0
+add address=10.0.3.1/30 interface=ether3 network=10.0.3.0
+add address=2.2.2.2 interface=loopback network=2.2.2.2
+/ip dhcp-client
+add disabled=no interface=ether1
+/mpls ldp
+set enabled=yes transport-address=2.2.2.2
+/mpls ldp interface
+add interface=ether2
+add interface=ether3
+/routing ospf network
+add area=backbone
+/system identity
+set name=R01.LND
+```
