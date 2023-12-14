@@ -133,6 +133,11 @@ add area=backbone
 /system identity
 set name=R01.NY
 ```
+<p>1. Cоздадим интерфейс loopback для настройки OSPF и MPLS. Добавим IP-адреса всем интерфейсам.
+<p>2. Включим MPLS на роутере у тех интерфейсов, которые смотрят внутрь сети.
+<p>3. Запустим динамическую маршрутизацию по OSPF.
+<p>4. Настроим EoMPLS на интерфейсах, смотрящих наружу.
+ 
 <h5>R01.LND</h5>
 
 ```
@@ -159,6 +164,8 @@ add area=backbone
 /system identity
 set name=R01.LND
 ```
+Здесь и далее аналогично настроим OSPF, MPLS, интерфейсы и IP-адреса.
+
 <h5>R01.LBN</h5>
 
 ```
@@ -273,6 +280,8 @@ add area=backbone
 /system identity
 set name=R01.SPB
 ```
+Настроим аналогично роутеру R01.SPB.
+
 <h5>SGI Prism</h5>
 
 ```
@@ -299,3 +308,4 @@ add disabled=no interface=ether1
 /system identity
 set name=PC1
 ```
+Добавим статические ip-адреса
