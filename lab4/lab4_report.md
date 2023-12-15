@@ -363,7 +363,7 @@ set name=PC3
 <h3>Проверка связности VRF</h3>
 <h5>LDN</h5>
 <p align="center">
- <img width="500px" src="pictures/ldn.png" alt="qr"/>
+ <img width="500px" src="pictures/lnd.png" alt="qr"/>
 </p> 
 <p align="center">Состояние Established
 <h3>Проверка VRF_DEVOPS таблиц<h3>
@@ -393,4 +393,66 @@ add bridge=VPLSb interface=VPLS2
 ``` 
 1. Разберем VRF.
 2. Настроим VPLS.
+3. <h5>R01.NY</h5>
 
+```
+/interface bridge
+add name=VPLSb
+/interface vpls
+add disabled=no l2mtu=1500 mac-address=02:74:16:82:73:59 name=VPLS1 \
+    remote-peer=1.1.1.1 vpls-id=10:0
+add disabled=no l2mtu=1500 mac-address=02:E7:AB:72:0D:02 name=VPLS3 \
+    remote-peer=6.6.6.6 vpls-id=10:0
+/interface bridge port
+add bridge=VPLSb interface=ether3
+add bridge=VPLSb interface=VPLS1
+add bridge=VPLSb interface=VPLS3
+```
+<h5>R01.NY</h5>
+
+```
+/interface bridge
+add name=VPLSb
+/interface vpls
+add disabled=no l2mtu=1500 mac-address=02:40:AD:5D:2D:A8 name=VPLS2 \
+    remote-peer=1.1.1.1 vpls-id=10:0
+add disabled=no l2mtu=1500 mac-address=02:B2:2B:38:4E:AE name=VPLS3 \
+    remote-peer=5.5.5.5 vpls-id=10:0
+/interface bridge port
+add bridge=VPLSb interface=ether3
+add bridge=VPLSb interface=VPLS2
+add bridge=VPLSb interface=VPLS3
+```
+<h5>PC1</h5>
+
+```
+/ip address
+add address=192.168.0.1/24 interface=ether2 network=192.168.0.0
+```
+Настраиваем IP-адресацию в одной сети.
+<h5>PC2</h5>
+
+```
+/ip address
+add address=192.168.0.2/24 interface=ether2 network=192.168.0.0
+```
+<h5>PC3</h5>
+
+```
+/ip address
+add address=192.168.0.3/24 interface=ether2 network=192.168.0.0
+```
+<h3>Проверка связности сети</h3>
+<p align="center">
+ <img width="500px" src="pictures/1-2.png" alt="qr"/>
+</p> 
+<p align="center">PC1 -> PC2
+<p align="center">
+ <img width="500px" src="pictures/2-3.png" alt="qr"/>
+</p> 
+<p align="center">PC2 -> PC3
+<p align="center">
+ <img width="500px" src="pictures/3-1.png" alt="qr"/>
+</p> 
+<p align="center">PC3 -> PC1
+<p><b>Вывод:</b> В ходе лабораторной рабты были изучены протоколы BGP, MPLS и правила организации L3VPN и VPLS.
