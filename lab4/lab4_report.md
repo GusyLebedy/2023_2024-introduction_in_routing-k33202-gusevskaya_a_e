@@ -94,4 +94,4 @@ topology:
 <p align="center">
  <img width="500px" src="Network.drawio.png" alt="qr"/>
 </p>
-<p>4. Перейдем к настройке оборудования
+<p>4. Перейдем к настройке оборудования1
