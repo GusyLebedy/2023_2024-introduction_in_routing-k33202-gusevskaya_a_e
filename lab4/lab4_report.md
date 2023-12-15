@@ -131,6 +131,7 @@ add area=backbone
 /system identity
 set name=R01.NY
 ```
+Настраиваем IP-адреса и интерфейсы в соответствии с топологией, MPLS, OSPF и iBGP маршрутизацию.
 <h5>R01.LND</h5>
 
 ```
@@ -168,6 +169,7 @@ add area=backbone
 /system identity
 set name=R01.LND
 ```
+На внутренних роутерах настроим IP-адреса и интерфейсы в соответствии с топологией, MPLS и OSPF маршрутизацию. BGP маршрутизация будет включать RR кластер.
 <h5>R01.SPB</h5>
 
 ```
@@ -205,6 +207,7 @@ add area=backbone
 /system identity
 set name=R01.SPB
 ```
+Настраиваем IP-адреса и интерфейсы в соответствии с топологией, MPLS, OSPF и iBGP маршрутизацию.
 <h5>R01.HKI</h5>
 
 ```
@@ -357,3 +360,37 @@ add disabled=no interface=ether1
 /system identity
 set name=PC3
 ```
+<h3>Проверка связности VRF</h3>
+<h5>LDN</h5>
+<p align="center">
+ <img width="500px" src="pictures/ldn.png" alt="qr"/>
+</p> 
+<p align="center">Состояние Established
+<h3>Проверка VRF_DEVOPS таблиц<h3>
+ <h5>NY</h5>
+ <p align="center">
+ <img width="500px" src="pictures/ny-spb.png" alt="qr"/>
+</p> 
+ <h5>SPB</h5>
+<p align="center">
+ <img width="500px" src="pictures/spb-ny.png" alt="qr"/>
+</p> 
+<h3>Изменение конфигурации</h3>
+<h5>R01.SPB</h5>
+
+```
+/interface bridge
+add name=VPLSb
+/interface vpls
+add disabled=no l2mtu=1500 mac-address=02:3D:7A:3F:4A:28 name=VPLS1 \
+    remote-peer=5.5.5.5 vpls-id=10:0
+add disabled=no l2mtu=1500 mac-address=02:07:2A:39:C2:02 name=VPLS2 \
+    remote-peer=6.6.6.6 vpls-id=10:0
+/interface bridge port
+add bridge=VPLSb interface=ether2
+add bridge=VPLSb interface=VPLS1
+add bridge=VPLSb interface=VPLS2
+``` 
+1. Разберем VRF.
+2. Настроим VPLS.
+
