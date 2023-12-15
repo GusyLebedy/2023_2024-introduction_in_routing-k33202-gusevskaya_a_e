@@ -114,8 +114,8 @@ add address=5.5.5.5 interface=loopback network=5.5.5.5
 /ip dhcp-client
 add disabled=no interface=ether1
 /ip route vrf
-add export-route-targets=66500:111 import-route-targets=66500:111 interfaces=ether3 \
-    route-distinguisher=66500:111 routing-mark=VRF_DEVOPS
+add export-route-targets=65530:111 import-route-targets=65530:111 interfaces=ether3 \
+    route-distinguisher=6530:111 routing-mark=VRF_DEVOPS
 /mpls ldp
 set enabled=yes transport-address=5.5.5.5
 /mpls ldp interface
@@ -131,7 +131,7 @@ add area=backbone
 /system identity
 set name=R01.NY
 ```
-Настраиваем IP-адреса и интерфейсы в соответствии с топологией, MPLS, OSPF и iBGP маршрутизацию.
+Настраиваем IP-адреса и интерфейсы в соответствии с топологией, MPLS, OSPF и BGP маршрутизацию.
 <h5>R01.LND</h5>
 
 ```
@@ -159,11 +159,11 @@ add interface=ether3
 add interface=ether4
 /routing bgp peer
 add address-families=ip,l2vpn,l2vpn-cisco,vpnv4 name=peer2 remote-address=2.2.2.2 remote-as=\
-    66500 route-reflect=yes update-source=loopback
+    65530 route-reflect=yes update-source=loopback
 add address-families=ip,l2vpn,l2vpn-cisco,vpnv4 name=peer4 remote-address=3.3.3.3 remote-as=\
-    66500 route-reflect=yes update-source=loopback
+    65530 route-reflect=yes update-source=loopback
 add address-families=ip,l2vpn,l2vpn-cisco,vpnv4 name=peer5 remote-address=5.5.5.5 remote-as=\
-    66500 update-source=loopback
+    65530 update-source=loopback
 /routing ospf network
 add area=backbone
 /system identity
@@ -190,8 +190,8 @@ add disabled=no interface=ether1
 add disabled=no interface=ether2
 add disabled=no interface=ether3
 /ip route vrf
-add export-route-targets=66500:111 import-route-targets=66500:111 interfaces=\
-    ether2 route-distinguisher=66500:111 routing-mark=VRF_DEVOPS
+add export-route-targets=65530:111 import-route-targets=65530:111 interfaces=\
+    ether2 route-distinguisher=65530:111 routing-mark=VRF_DEVOPS
 /mpls ldp
 set enabled=yes transport-address=1.1.1.1
 /mpls ldp interface
@@ -201,13 +201,13 @@ add interface=ether3
 add redistribute-connected=yes routing-mark=VRF_DEVOPS
 /routing bgp peer
 add address-families=ip,l2vpn,l2vpn-cisco,vpnv4 name=peer1 remote-address=\
-    2.2.2.2 remote-as=66500 update-source=loopback
+    2.2.2.2 remote-as=65530 update-source=loopback
 /routing ospf network
 add area=backbone
 /system identity
 set name=R01.SPB
 ```
-Настраиваем IP-адреса и интерфейсы в соответствии с топологией, MPLS, OSPF и iBGP маршрутизацию.
+Настраиваем IP-адреса и интерфейсы в соответствии с топологией, MPLS, OSPF и BGP маршрутизацию.
 <h5>R01.HKI</h5>
 
 ```
@@ -224,7 +224,7 @@ add address=172.31.255.30/30 interface=ether1 network=172.31.255.28
 add address=10.0.1.2/30 interface=ether2 network=10.0.1.0
 add address=10.0.2.1/30 interface=ether3 network=10.0.2.0
 add address=10.0.3.1/30 interface=ether4 network=10.0.3.0
-add address=2.2.2.2 interface=Lo0 network=2.2.2.2
+add address=2.2.2.2 interface=loopback network=2.2.2.2
 /ip dhcp-client
 add disabled=no interface=ether1
 add disabled=no interface=ether2
@@ -238,11 +238,11 @@ add interface=ether3
 add interface=ether4
 /routing bgp peer
 add address-families=ip,l2vpn,l2vpn-cisco,vpnv4 name=peer1 remote-address=1.1.1.1 remote-as=\
-    66500 update-source=loopback
+    65530 update-source=loopback
 add address-families=ip,l2vpn,l2vpn-cisco,vpnv4 name=peer2 remote-address=4.4.4.4 remote-as=\
-    66500 route-reflect=yes update-source=loopback
+    65530 route-reflect=yes update-source=loopback
 add address-families=ip,l2vpn,l2vpn-cisco,vpnv4 name=peer3 remote-address=3.3.3.3 remote-as=\
-    66500 route-reflect=yes update-source=loopback
+    65530 route-reflect=yes update-source=loopback
 /routing ospf network
 add area=backbone
 /system identity
@@ -264,7 +264,7 @@ add address=172.31.255.30/30 interface=ether1 network=172.31.255.28
 add address=10.0.3.2/30 interface=ether2 network=10.0.3.0
 add address=10.0.4.1/30 interface=ether3 network=10.0.4.0
 add address=10.0.6.1/30 interface=ether4 network=10.0.6.0
-add address=3.3.3.3 interface=Lo0 network=3.3.3.3
+add address=3.3.3.3 interface=loopback network=3.3.3.3
 /ip dhcp-client
 add disabled=no interface=ether1
 /mpls ldp
@@ -275,11 +275,11 @@ add interface=ether3
 add interface=ether4
 /routing bgp peer
 add address-families=ip,l2vpn,l2vpn-cisco,vpnv4 name=peer3 remote-address=2.2.2.2 remote-as=\
-    66500 route-reflect=yes update-source=loopback
+    65530 route-reflect=yes update-source=loopback
 add address-families=ip,l2vpn,l2vpn-cisco,vpnv4 name=peer4 remote-address=4.4.4.4 remote-as=\
-    66500 route-reflect=yes update-source=loopback
+    65530 route-reflect=yes update-source=loopback
 add address-families=ip,l2vpn,l2vpn-cisco,vpnv4 name=peer6 remote-address=6.6.6.6 remote-as=\
-    66500 update-source=loopback
+    65530 update-source=loopback
 /routing ospf network
 add area=backbone
 /system identity
@@ -304,8 +304,8 @@ add address=6.6.6.6 interface=loopback network=6.6.6.6
 /ip dhcp-client
 add disabled=no interface=ether1
 /ip route vrf
-add export-route-targets=66500:111 import-route-targets=66500:111 interfaces=ether3 \
-    route-distinguisher=66500:111 routing-mark=VRF_DEVOPS
+add export-route-targets=65530:111 import-route-targets=66500:111 interfaces=ether3 \
+    route-distinguisher=65530:111 routing-mark=VRF_DEVOPS
 /mpls ldp
 set enabled=yes transport-address=6.6.6.6
 /mpls ldp interface
@@ -315,7 +315,7 @@ add interface=ether3
 add redistribute-connected=yes routing-mark=VRF_DEVOPS
 /routing bgp peer
 add address-families=ip,l2vpn,l2vpn-cisco,vpnv4 name=peer6 remote-address=3.3.3.3 remote-as=\
-    66500 update-source=loopback
+    65530 update-source=loopback
 /routing ospf network
 add area=backbone
 /system identity
