@@ -442,7 +442,7 @@ add address=192.168.0.2/24 interface=ether2 network=192.168.0.0
 /ip address
 add address=192.168.0.3/24 interface=ether2 network=192.168.0.0
 ```
-<h3>Проверка связности сети</h3>
+<h3>Проверка целостности сети</h3>
 <p align="center">
  <img width="500px" src="pictures/1-2.png" alt="qr"/>
 </p> 
