@@ -115,7 +115,7 @@ add address=5.5.5.5 interface=loopback network=5.5.5.5
 add disabled=no interface=ether1
 /ip route vrf
 add export-route-targets=65530:111 import-route-targets=65530:111 interfaces=ether3 \
-    route-distinguisher=6530:111 routing-mark=VRF_DEVOPS
+    route-distinguisher=65530:111 routing-mark=VRF_DEVOPS
 /mpls ldp
 set enabled=yes transport-address=5.5.5.5
 /mpls ldp interface
