@@ -280,7 +280,7 @@ add area=backbone
 /system identity
 set name=R01.SPB
 ```
-Настроим аналогично роутеру R01.SPB.
+Настроим аналогично роутеру R01.NY.
 
 <h5>SGI Prism</h5>
 
