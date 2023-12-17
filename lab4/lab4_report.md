@@ -393,7 +393,7 @@ add bridge=VPLSb interface=VPLS2
 ``` 
 1. Разберем VRF.
 2. Настроим VPLS.
-3. <h5>R01.NY</h5>
+<h5>R01.NY</h5>
 
 ```
 /interface bridge
@@ -408,7 +408,7 @@ add bridge=VPLSb interface=ether3
 add bridge=VPLSb interface=VPLS1
 add bridge=VPLSb interface=VPLS3
 ```
-<h5>R01.NY</h5>
+<h5>R01.SVL</h5>
 
 ```
 /interface bridge
