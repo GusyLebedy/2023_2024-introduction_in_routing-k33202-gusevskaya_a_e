@@ -191,13 +191,13 @@ set name=SW02.L3.02.TEST
 <p align="center">
  <img width="500px" src="pictures/R01.TEST.png" alt="qr"/>
 </p>
-<p align="center">Пинги с роутера 
+<p align="center">Пинги с R01.TEST
 <p align="center">
  <img width="500px" src="pictures/SW02.L3.01.png" alt="qr"/>
 </p>
-<p align="center">Пинги с свича второго уровня
+<p align="center">Пинги с SW02.L3.01
 <p align="center">
  <img width="500px" src="pictures/SW01.L3.01.png" alt="qr"/>
 </p>
-<p align="center">Пинги с свича второго 
+<p align="center">Пинги с SW01.L3.01
 <p><b>Вывод:</b> В ходе работы были получены навыки создания виртуализированных контейнеров с помощью Docker и ContainerLab. Произведена настройка VLAN, IP адресации, DHCP.
