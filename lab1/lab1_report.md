@@ -201,3 +201,28 @@ set name=SW02.L3.02.TEST
 </p>
 <p align="center">Пинги с SW01.L3.01
 <p><b>Вывод:</b> В ходе работы были получены навыки создания виртуализированных контейнеров с помощью Docker и ContainerLab. Произведена настройка VLAN, IP адресации, DHCP.
+<p><b>UPD:</b> дополнительные скрины конфигураций
+<p align="center">
+ <img width="500px" src="pictures/deploy.png" alt="qr"/>
+</p>
+<p align="center">Развернутые контейнеры в терминале
+<p align="center">
+ <img width="500px" src="pictures/code.png" alt="qr"/>
+</p>
+<p align="center">Заполнение конфигурации R01.TEST
+<p align="center">
+ <img width="500px" src="pictures/config1.png" alt="qr"/>
+</p>
+<p align="center">Конфигурация R01.TEST в терминале
+<p align="center">
+ <img width="500px" src="pictures/config2.png" alt="qr"/>
+</p>
+<p align="center">Конфигурация SW01.L3.01 в терминале
+<p align="center">
+ <img width="500px" src="pictures/config21.png" alt="qr"/>
+</p>
+<p align="center">Конфигурация SW02.L3.01 в терминале
+<p align="center">
+ <img width="500px" src="pictures/config3.png" alt="qr"/>
+</p>
+<p align="center">Конфигурация SW02.L3.02 в терминале
