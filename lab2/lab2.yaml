@@ -1,8 +1,8 @@
 name: lab2
 
 mgmt:
-  network: statics
-  ipv4-subnet: 172.20.15.0/24
+  network: second
+  ipv4-subnet: 172.30.15.0/24
 
 topology:
 
@@ -10,37 +10,37 @@ topology:
     R01.MSK:
       kind: vr-ros
       image: vrnetlab/vr-routeros:6.47.9
-      mgmt-ipv4: 172.20.15.12
+      mgmt-ipv4: 172.30.15.12
 
     R01.BRL:
       kind: vr-ros
       image: vrnetlab/vr-routeros:6.47.9
-      mgmt-ipv4: 172.20.15.13
+      mgmt-ipv4: 172.30.15.13
 
     R01.FRT:
       kind: vr-ros
       image: vrnetlab/vr-routeros:6.47.9
-      mgmt-ipv4: 172.20.15.14
+      mgmt-ipv4: 172.30.15.14
 
     PC1:
-      kind: linux
-      image: alpine:latest
-      mgmt-ipv4: 172.20.15.15
+      kind: vr-ros
+      image: vrnetlab/vr-routeros:6.47.9
+      mgmt-ipv4: 172.30.15.15
 
     PC2:
-      kind: linux
-      image: alpine:latest
-      mgmt-ipv4: 172.20.15.16
+      kind: vr-ros
+      image: vrnetlab/vr-routeros:6.47.9
+      mgmt-ipv4: 172.30.15.16
 
     PC3:
-      kind: linux
-      image: ubuntu:latest
-      mgmt-ipv4: 172.20.15.17
+      kind: vr-ros
+      image: vrnetlab/vr-routeros:6.47.9
+      mgmt-ipv4: 172.30.15.17
 
   links:
     - endpoints: ["R01.MSK:eth2", "R01.FRT:eth2"]
     - endpoints: ["R01.MSK:eth1", "R01.BRL:eth1"]
     - endpoints: ["R01.BRL:eth2", "R01.FRT:eth1"]
-    - endpoints: ["R01.MSK:eth3", "PC1:eth3"]
-    - endpoints: ["R01.FRT:eth3", "PC2:eth3"]
-    - endpoints: ["R01.BRL:eth3", "PC3:eth3"]
+    - endpoints: ["R01.MSK:eth3", "PC1:eth1"]
+    - endpoints: ["R01.BRL:eth3", "PC3:eth1"]
+    - endpoints: ["R01.FRT:eth3", "PC2:eth1"]
