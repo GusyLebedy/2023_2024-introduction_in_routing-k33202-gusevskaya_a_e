@@ -24,8 +24,8 @@
 name: lab2
 
 mgmt:
-  network: statics
-  ipv4-subnet: 172.20.15.0/24
+  network: second
+  ipv4-subnet: 172.30.15.0/24
 
 topology:
 
@@ -33,40 +33,40 @@ topology:
     R01.MSK:
       kind: vr-ros
       image: vrnetlab/vr-routeros:6.47.9
-      mgmt-ipv4: 172.20.15.12
+      mgmt-ipv4: 172.30.15.12
 
     R01.BRL:
       kind: vr-ros
       image: vrnetlab/vr-routeros:6.47.9
-      mgmt-ipv4: 172.20.15.13
+      mgmt-ipv4: 172.30.15.13
 
     R01.FRT:
       kind: vr-ros
       image: vrnetlab/vr-routeros:6.47.9
-      mgmt-ipv4: 172.20.15.14
+      mgmt-ipv4: 172.30.15.14
 
     PC1:
-      kind: linux
-      image: alpine:latest
-      mgmt-ipv4: 172.20.15.15
+      kind: vr-ros
+      image: vrnetlab/vr-routeros:6.47.9
+      mgmt-ipv4: 172.30.15.15
 
     PC2:
-      kind: linux
-      image: alpine:latest
-      mgmt-ipv4: 172.20.15.16
+      kind: vr-ros
+      image: vrnetlab/vr-routeros:6.47.9
+      mgmt-ipv4: 172.30.15.16
 
     PC3:
-      kind: linux
-      image: ubuntu:latest
-      mgmt-ipv4: 172.20.15.17
+      kind: vr-ros
+      image: vrnetlab/vr-routeros:6.47.9
+      mgmt-ipv4: 172.30.15.17
 
   links:
     - endpoints: ["R01.MSK:eth2", "R01.FRT:eth2"]
     - endpoints: ["R01.MSK:eth1", "R01.BRL:eth1"]
     - endpoints: ["R01.BRL:eth2", "R01.FRT:eth1"]
-    - endpoints: ["R01.MSK:eth3", "PC1:eth3"]
-    - endpoints: ["R01.FRT:eth3", "PC2:eth3"]
-    - endpoints: ["R01.BRL:eth3", "PC3:eth3"]
+    - endpoints: ["R01.MSK:eth3", "PC1:eth1"]
+    - endpoints: ["R01.BRL:eth3", "PC3:eth1"]
+    - endpoints: ["R01.FRT:eth3", "PC2:eth1"]
 ```
 <p>2. С помощью команды ```clab deploy --topo lab2.yaml``` развернем лабораторию. На выходе получим 6 контейнеров.
 <p align="center">
@@ -165,11 +165,6 @@ add address=172.31.255.30/30 interface=ether1 network=172.31.255.28
 /ip dhcp-client
 add disabled=no interface=ether1
 add disabled=no interface=ether2
-/ip route
-add distance=1 dst-address=10.10.1.0/30 gateway=192.168.10.1
-add distance=1 dst-address=10.10.2.0/30 gateway=192.168.10.1
-add distance=1 dst-address=192.168.20.0/24 gateway=192.168.10.1
-add distance=1 dst-address=192.168.30.0/24 gateway=192.168.10.1
 /system identity
 set name=PC1
 ```
@@ -186,11 +181,6 @@ add address=172.31.255.30/30 interface=ether1 network=172.31.255.28
 /ip dhcp-client
 add disabled=no interface=ether1
 add disabled=no interface=ether2
-/ip route
-add distance=1 dst-address=10.10.2.0/30 gateway=192.168.20.1
-add distance=1 dst-address=10.10.3.0/30 gateway=192.168.20.1
-add distance=1 dst-address=192.168.10.0/24 gateway=192.168.20.1
-add distance=1 dst-address=192.168.30.0/24 gateway=192.168.20.1
 /system identity
 set name=PC2
 ```
@@ -204,11 +194,6 @@ add address=172.31.255.30/30 interface=ether1 network=172.31.255.28
 /ip dhcp-client
 add disabled=no interface=ether1
 add disabled=no interface=ether2
-/ip route
-add distance=1 dst-address=10.10.1.0/30 gateway=192.168.10.1
-add distance=1 dst-address=10.10.3.0/30 gateway=192.168.10.1
-add distance=1 dst-address=192.168.10.0/24 gateway=192.168.10.1
-add distance=1 dst-address=192.168.20.0/24 gateway=192.168.10.1
 /system identity
 set name=PC3
 ```
@@ -216,15 +201,37 @@ set name=PC3
 <h3>Проверка целостности сети</h3>
 <p>5. Проверим доступность устройств, пропинговав их
 <p align="center">
- <img width="500px" src="pictures/ping12.png" alt="qr"/>
+ <img width="500px" src="pictures/ping1.png" alt="qr"/>
 </p>
-<p align="center">Пинг c PC1 на PC2
+<p align="center">Пинги c PC1 
 <p align="center">
- <img width="500px" src="pictures/ping13.png" alt="qr"/>
+ <img width="500px" src="pictures/ping2.png" alt="qr"/>
 </p>
-<p align="center">Пинг c PC1 на PC3
+<p align="center">Пинги c PC2
 <p align="center">
- <img width="500px" src="pictures/ping23.png" alt="qr"/>
+ <img width="500px" src="pictures/ping3.png" alt="qr"/>
 </p>
-<p align="center">Пинг c PC2 на PC3
+<p align="center">Пинги c PC3
 <p><b>Вывод:</b> В ходе данной лабораторной работы мы изучили принципы планирования IP адресов, настройку статической маршрутизации и сетевые функции устройств.
+<p><b>UPD:</b> дополнительные скрины конфигураций
+<p align="center">
+ <img width="500px" src="pictures/terminal.png" alt="qr"/>
+</p>
+<p align="center">Развернутые контейнеры в терминале
+<p align="center">
+ <img width="500px" src="pictures/R01.MSK.png" alt="qr"/>
+</p>
+<p align="center">Заполнение конфигурации R01.MSK
+<p align="center">
+ <img width="500px" src="pictures/R01.FRT.png" alt="qr"/>
+</p>
+<p align="center">Заполнение конфигурации R01.FRT 
+<p align="center">
+ <img width="500px" src="pictures/R01.BRL.png" alt="qr"/>
+</p>
+<p align="center">Заполнение конфигурации R01.BRL
+<p align="center">
+ <img width="500px" src="pictures/neighbor.png" alt="qr"/>
+</p>
+<p align="center">ip соседей
+
