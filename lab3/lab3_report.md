@@ -24,8 +24,8 @@
 name: lab3
 
 mgmt:
-  network: statics
-  ipv4-subnet: 172.20.15.0/24
+  network: third
+  ipv4-subnet: 172.40.15.0/24
 
 topology:
 
@@ -33,42 +33,42 @@ topology:
     R01.NY:
       kind: vr-ros
       image: vrnetlab/vr-routeros:6.47.9
-      mgmt-ipv4: 172.20.15.12
+      mgmt-ipv4: 172.40.15.12
 
     R01.LND:
       kind: vr-ros
       image: vrnetlab/vr-routeros:6.47.9
-      mgmt-ipv4: 172.20.15.13
+      mgmt-ipv4: 172.40.15.13
 
     R01.LBN:
       kind: vr-ros
       image: vrnetlab/vr-routeros:6.47.9
-      mgmt-ipv4: 172.20.15.14
+      mgmt-ipv4: 172.40.15.14
       
     R01.HKI:
       kind: vr-ros
       image: vrnetlab/vr-routeros:6.47.9
-      mgmt-ipv4: 172.20.15.15
+      mgmt-ipv4: 172.40.15.15
       
     R01.MSK:
       kind: vr-ros
       image: vrnetlab/vr-routeros:6.47.9
-      mgmt-ipv4: 172.20.15.16
+      mgmt-ipv4: 172.40.15.16
       
     R01.SPB:
       kind: vr-ros
       image: vrnetlab/vr-routeros:6.47.9
-      mgmt-ipv4: 172.20.15.17
+      mgmt-ipv4: 172.40.15.17
 
     SGI_Prism:
-      kind: linux
-      image: alpine:latest
-      mgmt-ipv4: 172.20.15.18
+      kind: vr-ros
+      image: vrnetlab/vr-routeros:6.47.9
+      mgmt-ipv4: 172.40.15.18
 
     PC1:
-      kind: linux
-      image: alpine:latest
-      mgmt-ipv4: 172.20.15.19
+      kind: vr-ros
+      image: vrnetlab/vr-routeros:6.47.9
+      mgmt-ipv4: 172.40.15.19
 
   links:
     - endpoints: ["R01.NY:eth3", "R01.LND:eth2"]
