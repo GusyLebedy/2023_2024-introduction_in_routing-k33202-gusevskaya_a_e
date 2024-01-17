@@ -97,10 +97,7 @@ topology:
 <p><b>MPLS LDP</b> - протокол, распределяющий labels.
 <p><b>OSPF</b> - протокол маршрутизации, который используется для определения наиболее короткого пути между узлами в IP-сети.
 <p>Подключимся к устройству через telnet.
-<p align="center">
- <img width="500px" src="pictures/config.png" alt="qr"/>
-</p>
-  
+
 <h5>R01.NY</h5>
 
 ```
@@ -312,7 +309,7 @@ set name=PC1
 
 <h3>Таблица маршрутизации</h3>
 <p align="center">
- <img width="500px" src="pictures/routing.spb.png" alt="qr"/>
+ <img width="500px" src="pictures/routing.spb.jpg" alt="qr"/>
 </p> 
 <p align="center">R01.SPB
  <p align="center">
