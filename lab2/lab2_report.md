@@ -70,7 +70,7 @@ topology:
 ```
 <p>2. С помощью команды ```clab deploy --topo lab2.yaml``` развернем лабораторию. На выходе получим 6 контейнеров.
 <p align="center">
- <img width="500px" src="pictures/container.png" alt="qr"/>
+ <img width="500px" src="pictures/terminal.png" alt="qr"/>
 </p> 
 <p>3. Создадим схему связи, используя drawio
 <p align="center">
