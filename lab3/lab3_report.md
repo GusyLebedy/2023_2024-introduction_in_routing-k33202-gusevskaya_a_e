@@ -108,26 +108,26 @@ topology:
 add name=EoMPLS_bridge
 add name=loopback
 /interface vpls
-add cisco-style=yes cisco-style-id=222 disabled=no l2mtu=1500 mac-address=02:73:6A:04:96:C5 name=EoMPLS remote-peer=10.10.10.6
+add cisco-style=yes cisco-style-id=222 disabled=no l2mtu=1500 mac-address=02:A1:62:B3:E8:B7 name=EoMPLS remote-peer=10.10.10.6
 /interface wireless security-profiles
 set [ find default=yes ] supplicant-identity=MikroTik
 /routing ospf instance
 set [ find default=yes ] router-id=10.10.10.1
 /interface bridge port
-add bridge=EoMPLS_bridge interface=ether2
+add bridge=EoMPLS_bridge interface=ether3
 add bridge=EoMPLS_bridge interface=EoMPLS
 /ip address
 add address=172.31.255.30/30 interface=ether1 network=172.31.255.28
-add address=10.0.0.1/30 interface=ether3 network=10.0.0.0
-add address=10.0.2.1/30 interface=ether4 network=10.0.2.0
+add address=10.0.0.1/30 interface=ether4 network=10.0.0.0
+add address=10.0.2.1/30 interface=ether5 network=10.0.2.0
 add address=10.10.10.1 interface=loopback network=10.10.10.1
 /ip dhcp-client
 add disabled=no interface=ether1
 /mpls ldp
 set enabled=yes transport-address=10.10.10.1
 /mpls ldp interface
-add interface=ether3
 add interface=ether4
+add interface=ether5
 /routing ospf network
 add area=backbone
 /system identity
@@ -142,23 +142,23 @@ set name=R01.NY
 
 ```
 /interface bridge
-add name=loopback
+add name=Lo0
 /interface wireless security-profiles
 set [ find default=yes ] supplicant-identity=MikroTik
 /routing ospf instance
 set [ find default=yes ] router-id=2.2.2.2
 /ip address
 add address=172.31.255.30/30 interface=ether1 network=172.31.255.28
-add address=10.0.1.2/30 interface=ether2 network=10.0.1.0
-add address=10.0.3.1/30 interface=ether3 network=10.0.3.0
-add address=2.2.2.2 interface=loopback network=2.2.2.2
+add address=10.0.1.2/30 interface=ether3 network=10.0.1.0
+add address=10.0.3.1/30 interface=ether4 network=10.0.3.0
+add address=2.2.2.2 interface=Lo0 network=2.2.2.2
 /ip dhcp-client
 add disabled=no interface=ether1
 /mpls ldp
 set enabled=yes transport-address=2.2.2.2
 /mpls ldp interface
-add interface=ether2
 add interface=ether3
+add interface=ether4
 /routing ospf network
 add area=backbone
 /system identity
@@ -170,25 +170,25 @@ set name=R01.LND
 
 ```
 /interface bridge
-add name=loopback
+add name=Lo0
 /interface wireless security-profiles
 set [ find default=yes ] supplicant-identity=MikroTik
 /routing ospf instance
 set [ find default=yes ] router-id=3.3.3.3
 /ip address
 add address=172.31.255.30/30 interface=ether1 network=172.31.255.28
-add address=10.0.2.2/30 interface=ether2 network=10.0.2.0
-add address=10.0.4.1/30 interface=ether3 network=10.0.4.0
-add address=10.0.5.1/30 interface=ether4 network=10.0.5.0
-add address=3.3.3.3 interface=loopback network=3.3.3.3
+add address=10.0.2.2/30 interface=ether3 network=10.0.2.0
+add address=10.0.4.1/30 interface=ether4 network=10.0.4.0
+add address=10.0.5.1/30 interface=ether5 network=10.0.5.0
+add address=3.3.3.3 interface=Lo0 network=3.3.3.3
 /ip dhcp-client
 add disabled=no interface=ether1
 /mpls ldp
 set enabled=yes transport-address=3.3.3.3
 /mpls ldp interface
-add interface=ether2
 add interface=ether3
 add interface=ether4
+add interface=ether5
 /routing ospf network
 add area=backbone
 /system identity
@@ -198,25 +198,25 @@ set name=R01.LBN
 
 ```
 /interface bridge
-add name=loopback
+add name=Lo0
 /interface wireless security-profiles
 set [ find default=yes ] supplicant-identity=MikroTik
 /routing ospf instance
 set [ find default=yes ] router-id=4.4.4.4
 /ip address
 add address=172.31.255.30/30 interface=ether1 network=172.31.255.28
-add address=10.0.3.2/30 interface=ether2 network=10.0.3.0
-add address=10.0.6.1/30 interface=ether3 network=10.0.6.0
-add address=10.0.5.2/30 interface=ether4 network=10.0.5.0
-add address=4.4.4.4 interface=loopback network=4.4.4.4
+add address=10.0.3.2/30 interface=ether3 network=10.0.3.0
+add address=10.0.6.1/30 interface=ether4 network=10.0.6.0
+add address=10.0.5.2/30 interface=ether5 network=10.0.5.0
+add address=4.4.4.4 interface=Lo0 network=4.4.4.4
 /ip dhcp-client
 add disabled=no interface=ether1
 /mpls ldp
 set enabled=yes transport-address=4.4.4.4
 /mpls ldp interface
-add interface=ether2
 add interface=ether3
 add interface=ether4
+add interface=ether5
 /routing ospf network
 add area=backbone
 /system identity
@@ -226,23 +226,23 @@ set name=R01.HKI
 
 ```
 /interface bridge
-add name=loopback
+add name=Lo0
 /interface wireless security-profiles
 set [ find default=yes ] supplicant-identity=MikroTik
 /routing ospf instance
 set [ find default=yes ] router-id=5.5.5.5
 /ip address
 add address=172.31.255.30/30 interface=ether1 network=172.31.255.28
-add address=10.0.4.2/30 interface=ether2 network=10.0.4.0
-add address=10.0.7.1/30 interface=ether3 network=10.0.7.0
-add address=5.5.5.5 interface=loopback network=5.5.5.5
+add address=10.0.4.2/30 interface=ether3 network=10.0.4.0
+add address=10.0.7.1/30 interface=ether4 network=10.0.7.0
+add address=5.5.5.5 interface=Lo0 network=5.5.5.5
 /ip dhcp-client
 add disabled=no interface=ether1
 /mpls ldp
 set enabled=yes transport-address=5.5.5.5
 /mpls ldp interface
-add interface=ether2
 add interface=ether3
+add interface=ether4
 /routing ospf network
 add area=backbone
 /system identity
@@ -252,29 +252,29 @@ set name=R01.MSK
 
 ```
 /interface bridge
-add name=EoMPLS_bridge
-add name=loopback
+add name=EoMPLS_B
+add name=Lo0
 /interface vpls
-add cisco-style=yes cisco-style-id=222 disabled=no l2mtu=1500 mac-address=02:81:EA:1D:D6:9A name=EoMPLS remote-peer=1.1.1.1
+add cisco-style=yes cisco-style-id=100 disabled=no l2mtu=1500 mac-address=02:8E:32:0B:2C:4E name=EoMPLS remote-peer=1.1.1.1
 /interface wireless security-profiles
 set [ find default=yes ] supplicant-identity=MikroTik
 /routing ospf instance
 set [ find default=yes ] router-id=6.6.6.6
 /interface bridge port
-add bridge=EoMPLS_bridge interface=ether4
-add bridge=EoMPLS_bridge interface=EoMPLS
+add bridge=EoMPLS_B interface=ether5
+add bridge=EoMPLS_B interface=EoMPLS
 /ip address
 add address=172.31.255.30/30 interface=ether1 network=172.31.255.28
-add address=10.0.7.2/30 interface=ether2 network=10.0.7.0
-add address=10.0.6.2/30 interface=ether3 network=10.0.6.0
-add address=6.6.6.6 interface=loopback network=6.6.6.6
+add address=10.0.7.2/30 interface=ether3 network=10.0.7.0
+add address=10.0.6.2/30 interface=ether4 network=10.0.6.0
+add address=6.6.6.6 interface=Lo0 network=6.6.6.6
 /ip dhcp-client
 add disabled=no interface=ether1
 /mpls ldp
 set enabled=yes transport-address=6.6.6.6
 /mpls ldp interface
-add interface=ether2
 add interface=ether3
+add interface=ether4
 /routing ospf network
 add area=backbone
 /system identity
@@ -289,7 +289,7 @@ set name=R01.SPB
 set [ find default=yes ] supplicant-identity=MikroTik
 /ip address
 add address=172.31.255.30/30 interface=ether1 network=172.31.255.28
-add address=192.168.10.11/24 interface=ether2 network=192.168.10.0
+add address=192.168.10.11/24 interface=ether3 network=192.168.10.0
 /ip dhcp-client
 add disabled=no interface=ether1
 /system identity
@@ -302,7 +302,7 @@ set name=SGI-Prism
 set [ find default=yes ] supplicant-identity=MikroTik
 /ip address
 add address=172.31.255.30/30 interface=ether1 network=172.31.255.28
-add address=192.168.10.12/24 interface=ether2 network=192.168.10.0
+add address=192.168.10.12/24 interface=ether3 network=192.168.10.0
 /ip dhcp-client
 add disabled=no interface=ether1
 /system identity
@@ -312,26 +312,56 @@ set name=PC1
 
 <h3>Таблица маршрутизации</h3>
 <p align="center">
- <img width="500px" src="pictures/routingny.png" alt="qr"/>
+ <img width="500px" src="pictures/routing.spb.png" alt="qr"/>
 </p> 
-<p align="center">R01.NY
+<p align="center">R01.SPB
  <p align="center">
  <img width="500px" src="pictures/routingmsk.png" alt="qr"/>
 </p> 
 <p align="center">R01.MSK
+ <p align="center">
+ <img width="500px" src="pictures/routinglbn.png" alt="qr"/>
+</p> 
+<p align="center">R01.LBN
 <h3>Трассировка</h3>
 <p align="center">
  <img width="500px" src="pictures/road.png" alt="qr"/>
 </p> 
-<p align="center">SPB->NY
+<p align="center">SPB-NY
 <h3>Проверка целостности сети</h3>
 <p align="center">
  <img width="500px" src="pictures/ping1.png" alt="qr"/>
 </p> 
-<p align="center">PC1 -> SGI_Prism
+<p align="center">пинг с PC1 
 <p align="center">
  <img width="500px" src="pictures/ping2.png" alt="qr"/>
 </p> 
-<p align="center">SGI_Prism -> PC1
+<p align="center">пинг с SGI_Prism
  
 <p><b>Вывод:</b> В ходе лабораторной работы были изучены протоколы OSPF и MPLS, а также механизмы организации EoMPLS.
+<p><b>UPD:</b> дополнительные скрины конфигураций
+<p align="center">
+ <img width="500px" src="pictures/R01.MSK.png" alt="qr"/>
+</p>
+<p align="center">Заполнение конфигурации R01.MSK
+<p align="center">
+ <img width="500px" src="pictures/R01.NY.png" alt="qr"/>
+</p>
+<p align="center">Заполнение конфигурации R01.NY 
+<p align="center">
+ <img width="500px" src="pictures/R01.SPB.png" alt="qr"/>
+</p>
+<p align="center">Заполнение конфигурации R01.SPB
+<p align="center">
+ <img width="500px" src="pictures/R01.LND.png" alt="qr"/>
+</p>
+<p align="center">Заполнение конфигурации R01.LND
+<p align="center">
+ <img width="500px" src="pictures/R01.LBN.png" alt="qr"/>
+</p>
+<p align="center">Заполнение конфигурации R01.LBN
+<p align="center">
+ <img width="500px" src="pictures/R01.HKI.png" alt="qr"/>
+</p>
+<p align="center">Заполнение конфигурации R01.HKI
+
