@@ -24,8 +24,8 @@
 name: lab4
 
 mgmt:
-  network: statics
-  ipv4-subnet: 172.20.15.0/24
+  network: fourth
+  ipv4-subnet: 172.50.15.0/24
 
 topology:
 
@@ -33,47 +33,47 @@ topology:
     R01.NY:
       kind: vr-ros
       image: vrnetlab/vr-routeros:6.47.9
-      mgmt-ipv4: 172.20.15.12
+      mgmt-ipv4: 172.50.15.12
 
     R01.LND:
       kind: vr-ros
       image: vrnetlab/vr-routeros:6.47.9
-      mgmt-ipv4: 172.20.15.13
+      mgmt-ipv4: 172.50.15.13
 
     R01.LBN:
       kind: vr-ros
       image: vrnetlab/vr-routeros:6.47.9
-      mgmt-ipv4: 172.20.15.14
+      mgmt-ipv4: 172.50.15.14
       
     R01.HKI:
       kind: vr-ros
       image: vrnetlab/vr-routeros:6.47.9
-      mgmt-ipv4: 172.20.15.15
+      mgmt-ipv4: 172.50.15.15
       
     R01.SVL:
       kind: vr-ros
       image: vrnetlab/vr-routeros:6.47.9
-      mgmt-ipv4: 172.20.15.16
+      mgmt-ipv4: 172.50.15.16
       
     R01.SPB:
       kind: vr-ros
       image: vrnetlab/vr-routeros:6.47.9
-      mgmt-ipv4: 172.20.15.17
+      mgmt-ipv4: 172.50.15.17
 
     PC1:
-      kind: linux
-      image: alpine:latest
-      mgmt-ipv4: 172.20.15.18
+      kind: vr-ros
+      image: vrnetlab/vr-routeros:6.47.9
+      mgmt-ipv4: 172.50.15.18
 
     PC2:
-      kind: linux
-      image: alpine:latest
-      mgmt-ipv4: 172.20.15.19
+      kind: vr-ros
+      image: vrnetlab/vr-routeros:6.47.9
+      mgmt-ipv4: 172.50.15.19
 
     PC3:
-      kind: linux
-      image: alpine:latest
-      mgmt-ipv4: 172.20.15.20
+      kind: vr-ros
+      image: vrnetlab/vr-routeros:6.47.9
+      mgmt-ipv4: 172.50.15.20
 
   links:
     - endpoints: ["R01.NY:eth2","PC2:eth1"]
@@ -361,20 +361,24 @@ add disabled=no interface=ether1
 set name=PC3
 ```
 <h3>Проверка связности VRF</h3>
-<h5>LDN</h5>
+<h5>LND</h5>
 <p align="center">
  <img width="500px" src="pictures/lnd.png" alt="qr"/>
 </p> 
-<p align="center">Состояние Established
-<h3>Проверка VRF_DEVOPS таблиц<h3>
- <h5>NY</h5>
- <p align="center">
- <img width="500px" src="pictures/ny-spb.png" alt="qr"/>
-</p> 
- <h5>SPB</h5>
+<h5>HKI</h5>
 <p align="center">
- <img width="500px" src="pictures/spb-ny.png" alt="qr"/>
+ <img width="500px" src="pictures/hki.png" alt="qr"/>
 </p> 
+<h5>SPB</h5>
+<p align="center">
+ <img width="500px" src="pictures/spb.png" alt="qr"/>
+</p>
+<h5>SLV</h5>
+<p align="center">
+ <img width="500px" src="pictures/slv.png" alt="qr"/>
+</p> 
+<p align="center">Состояние Established
+ 
 <h3>Изменение конфигурации</h3>
 <h5>R01.SPB</h5>
 
@@ -399,9 +403,9 @@ add bridge=VPLSb interface=VPLS2
 /interface bridge
 add name=VPLSb
 /interface vpls
-add disabled=no l2mtu=1500 mac-address=02:74:16:82:73:59 name=VPLS1 \
+add disabled=no l2mtu=1500 mac-address=02:B1:06:D7:C4:A8 name=VPLS1 \
     remote-peer=1.1.1.1 vpls-id=10:0
-add disabled=no l2mtu=1500 mac-address=02:E7:AB:72:0D:02 name=VPLS3 \
+add disabled=no l2mtu=1500 mac-address=02:82:66:ED:28:4E name=VPLS3 \
     remote-peer=6.6.6.6 vpls-id=10:0
 /interface bridge port
 add bridge=VPLSb interface=ether3
@@ -414,9 +418,9 @@ add bridge=VPLSb interface=VPLS3
 /interface bridge
 add name=VPLSb
 /interface vpls
-add disabled=no l2mtu=1500 mac-address=02:40:AD:5D:2D:A8 name=VPLS2 \
+add disabled=no l2mtu=1500 mac-address=02:2B:1B:C8:C9:75 name=VPLS2 \
     remote-peer=1.1.1.1 vpls-id=10:0
-add disabled=no l2mtu=1500 mac-address=02:B2:2B:38:4E:AE name=VPLS3 \
+add disabled=no l2mtu=1500 mac-address=02:DB:9D:19:FC:5A name=VPLS3 \
     remote-peer=5.5.5.5 vpls-id=10:0
 /interface bridge port
 add bridge=VPLSb interface=ether3
@@ -446,13 +450,39 @@ add address=192.168.0.3/24 interface=ether2 network=192.168.0.0
 <p align="center">
  <img width="500px" src="pictures/1-2.png" alt="qr"/>
 </p> 
-<p align="center">PC1 -> PC2
+<p align="center">пинг с PC1
 <p align="center">
  <img width="500px" src="pictures/2-3.png" alt="qr"/>
 </p> 
-<p align="center">PC2 -> PC3
+<p align="center">пинг с PC2
 <p align="center">
  <img width="500px" src="pictures/3-1.png" alt="qr"/>
 </p> 
-<p align="center">PC3 -> PC1
+<p align="center">пинг с PC3
 <p><b>Вывод:</b> В ходе лабораторной рабты были изучены протоколы BGP, MPLS и правила организации L3VPN и VPLS.
+<p><b>UPD:</b> дополнительные скрины конфигураций
+<p align="center">
+ <img width="500px" src="pictures/R01.NY.png" alt="qr"/>
+</p>
+<p align="center">Заполнение конфигурации R01.NY 
+<p align="center">
+ <img width="500px" src="pictures/R01.SPB.png" alt="qr"/>
+</p>
+<p align="center">Заполнение конфигурации R01.SPB
+<p align="center">
+ <img width="500px" src="pictures/R01.LND.png" alt="qr"/>
+</p>
+<p align="center">Заполнение конфигурации R01.LND
+<p align="center">
+ <img width="500px" src="pictures/R01.LBN.png" alt="qr"/>
+</p>
+<p align="center">Заполнение конфигурации R01.LBN
+<p align="center">
+ <img width="500px" src="pictures/R01.HKI.png" alt="qr"/>
+</p>
+<p align="center">Заполнение конфигурации R01.HKI
+<p align="center">
+ <img width="500px" src="pictures/R01.SVL.png" alt="qr"/>
+</p>
+<p align="center">Заполнение конфигурации R01.SVL
+
