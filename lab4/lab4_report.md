@@ -373,9 +373,9 @@ set name=PC3
 <p align="center">
  <img width="500px" src="pictures/spb.png" alt="qr"/>
 </p>
-<h5>SLV</h5>
+<h5>SVL</h5>
 <p align="center">
- <img width="500px" src="pictures/slv.png" alt="qr"/>
+ <img width="500px" src="pictures/svl.png" alt="qr"/>
 </p> 
 <p align="center">Состояние Established
  
@@ -485,4 +485,15 @@ add address=192.168.0.3/24 interface=ether2 network=192.168.0.0
  <img width="500px" src="pictures/R01.SVL.png" alt="qr"/>
 </p>
 <p align="center">Заполнение конфигурации R01.SVL
-
+<p align="center">
+ <img width="500px" src="pictures/PC1.png" alt="qr"/>
+</p>
+<p align="center">Заполнение конфигурации PC1
+<p align="center">
+ <img width="500px" src="pictures/PC2.png" alt="qr"/>
+</p>
+<p align="center">Заполнение конфигурации PC2
+<p align="center">
+ <img width="500px" src="pictures/PC3.png" alt="qr"/>
+</p>
+<p align="center">Заполнение конфигурации PC3
